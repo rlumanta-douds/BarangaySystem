@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Resident;
 
 class User extends Authenticatable
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // Added role here
+        'role',
     ];
 
     /**
@@ -42,4 +43,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Automatically sync newly registered resident accounts to the residents table.
+     */
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            if ($user->role === 'resident') {
+                Resident::firstOrCreate(
+                    ['name' => $user->name],
+                    [
+                        'resident_id' => '#RES-' . rand(1000, 9999),
+                        'address'     => 'Barangay Proper',
+                        'contact'     => 'N/A',
+                        'status'      => 'Active',
+                    ]
+                );
+            }
+        });
+    }
 }
