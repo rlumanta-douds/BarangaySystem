@@ -160,30 +160,55 @@
             </div>
 
             <nav class="sidebar-nav">
-                <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="fa-solid fa-chart-pie"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="{{ route('residents.page') }}" class="{{ request()->routeIs('residents.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Residents</span>
-                </a>
-                <a href="{{ route('certificates.page') }}" class="{{ request()->routeIs('certificates.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-file-lines"></i>
-                    <span>Certificates</span>
-                </a>
-                <a href="{{ route('announcements.page') }}" class="{{ request()->routeIs('announcements.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-bullhorn"></i>
-                    <span>Announcements</span>
-                </a>
-                <a href="{{ route('blotter.page') }}" class="{{ request()->routeIs('blotter.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <span>Blotter Records</span>
-                </a>
-                <a href="{{ route('reports.page') }}" class="{{ request()->routeIs('reports.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-file-contract"></i>
-                    <span>Reports</span>
-                </a>
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <!-- ADMIN PORTAL SIDEBAR -->
+                    <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{{ route('residents.page') }}" class="{{ request()->routeIs('residents.*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Residents</span>
+                    </a>
+                    <a href="{{ route('certificates.page') }}" class="{{ request()->routeIs('certificates.*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Certificates</span>
+                    </a>
+                    <a href="{{ route('announcements.page') }}" class="{{ request()->routeIs('announcements.*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </a>
+                    <a href="{{ route('blotter.page') }}" class="{{ request()->routeIs('blotter.*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Blotter Records</span>
+                    </a>
+                    <a href="{{ route('reports.page') }}" class="{{ request()->routeIs('reports.*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-contract"></i>
+                        <span>Reports</span>
+                    </a>
+                @else
+                    <!-- RESIDENT PORTAL SIDEBAR -->
+                    <a href="{{ route('resident.dashboard') }}" class="{{ request()->routeIs('resident.dashboard') ? 'active' : '' }}">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="{{ route('resident.profile') }}" class="{{ request()->routeIs('resident.profile*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span>Profile View</span>
+                    </a>
+                    <a href="{{ route('resident.certificates') }}" class="{{ request()->routeIs('resident.certificates*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Certificate Request</span>
+                    </a>
+                    <a href="{{ route('resident.announcements') }}" class="{{ request()->routeIs('resident.announcements*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <span>Announcement</span>
+                    </a>
+                    <a href="{{ route('resident.history') }}" class="{{ request()->routeIs('resident.history') ? 'active' : '' }}">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Request History</span>
+                    </a>
+                @endif
             </nav>
         </div>
 
@@ -200,10 +225,12 @@
 
     <div class="main-wrapper">
         <header class="topbar">
-            <div class="topbar-title">Overview &amp; Management Panel</div>
+            <div class="topbar-title">
+                {{ (auth()->check() && auth()->user()->role === 'admin') ? 'Overview & Management Panel' : 'Resident Portal' }}
+            </div>
             <div class="topbar-user">
                 <i class="fa-solid fa-circle-user"></i>
-                <span>{{ auth()->user()->name ?? 'Head Administrator' }}</span>
+                <span>{{ auth()->user()->name ?? 'User' }}</span>
             </div>
         </header>
 
