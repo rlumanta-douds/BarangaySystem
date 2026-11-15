@@ -3,115 +3,53 @@
 @section('content')
 <style>
     /* ========================================================
-       1. OVERVIEW CARDS (ALL 4 IN 1 HORIZONTAL LINE)
+       1. TOP HEADER & COMPACT QUICK NAVIGATION BAR
        ======================================================== */
-    .dashboard-cards-container {
+    .dashboard-top-bar {
         display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        flex-wrap: wrap !important;
         gap: 16px !important;
-        width: 100% !important;
-        margin-bottom: 30px !important;
+        margin-bottom: 24px !important;
     }
 
-    .dashboard-card {
-        flex: 1 1 0% !important;
-        min-width: 0 !important;
-        background: #ffffff !important;
-        border-radius: 12px !important;
-        padding: 20px 16px !important;
+    .quick-nav-strip {
         display: flex !important;
-        align-items: center !important;
-        gap: 14px !important;
-        border: 1px solid #e2e8f0 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
-        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-    }
-
-    .dashboard-card:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
-    }
-
-    .card-icon-box {
-        width: 48px !important;
-        height: 48px !important;
-        border-radius: 10px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 1.25rem !important;
-        flex-shrink: 0 !important;
-    }
-
-    /* Icon Colors */
-    .bg-light-green  { background-color: #d1fae5 !important; color: #059669 !important; }
-    .bg-light-blue   { background-color: #dbeafe !important; color: #2563eb !important; }
-    .bg-light-yellow { background-color: #fef3c7 !important; color: #d97706 !important; }
-    .bg-light-red    { background-color: #fee2e2 !important; color: #dc2626 !important; }
-
-    .card-title-text {
-        font-size: 0.82rem !important;
-        font-weight: 500 !important;
-        color: #64748b !important;
-        margin-bottom: 2px !important;
-        white-space: nowrap !important;
-    }
-
-    .card-value-text {
-        font-size: 1.6rem !important;
-        font-weight: 700 !important;
-        color: #0f172a !important;
-        line-height: 1 !important;
-    }
-
-    /* ========================================================
-       2. QUICK NAVIGATION BUTTONS (ALL 5 IN 1 HORIZONTAL LINE)
-       ======================================================== */
-    .quick-nav-title {
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        color: #1e293b !important;
-        margin-bottom: 16px !important;
-    }
-
-    .quick-nav-container {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        gap: 12px !important;
-        width: 100% !important;
-        margin-bottom: 35px !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        margin-bottom: 26px !important;
     }
 
     .quick-nav-card {
-        flex: 1 1 0% !important;
-        min-width: 0 !important;
+        flex: 1 1 170px !important;
         background: #ffffff !important;
         border: 1px solid #e2e8f0 !important;
+        border-left: 4px solid #059669 !important;
         border-radius: 10px !important;
-        padding: 16px 14px !important;
+        padding: 13px 14px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
         text-decoration: none !important;
         color: #1e293b !important;
-        font-size: 0.85rem !important;
+        font-size: 0.84rem !important;
         font-weight: 600 !important;
         box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
         transition: all 0.2s ease !important;
     }
 
     .quick-nav-card:hover {
+        background-color: #ecfdf5 !important;
         border-color: #10b981 !important;
-        color: #047857 !important;
+        color: #064e3b !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 4px 8px rgba(16, 185, 129, 0.1) !important;
+        box-shadow: 0 4px 8px rgba(16, 185, 129, 0.12) !important;
     }
 
     .quick-nav-card i {
-        color: #10b981 !important;
-        font-size: 0.9rem !important;
+        color: #059669 !important;
+        font-size: 0.88rem !important;
         transition: transform 0.2s !important;
     }
 
@@ -120,20 +58,70 @@
     }
 
     /* ========================================================
-       3. LOWER SUMMARY SECTION (TABLES & ACTIVITY)
+       2. ANALYTICS CHARTS & GRAPHS SECTION
+       ======================================================== */
+    .analytics-grid {
+        display: grid !important;
+        grid-template-columns: 1.75fr 1fr !important;
+        gap: 20px !important;
+        margin-bottom: 26px !important;
+    }
+
+    .chart-card-box {
+        background: #ffffff !important;
+        border-radius: 14px !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 20px !important;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .chart-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 16px !important;
+    }
+
+    .chart-header h3 {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+    }
+
+    .chart-subtitle {
+        font-size: 0.78rem !important;
+        color: #64748b !important;
+        margin-top: 2px !important;
+    }
+
+    .green-tag {
+        background-color: #d1fae5 !important;
+        color: #065f46 !important;
+        font-size: 0.74rem !important;
+        font-weight: 600 !important;
+        padding: 4px 10px !important;
+        border-radius: 999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+    }
+
+    /* ========================================================
+       3. LOWER SUMMARY SECTION (TABLES & ANNOUNCEMENTS)
        ======================================================== */
     .bottom-summary-grid {
         display: grid !important;
-        grid-template-columns: 2fr 1fr !important;
+        grid-template-columns: 1.75fr 1fr !important;
         gap: 20px !important;
     }
 
     .summary-card-box {
         background: #ffffff !important;
-        border-radius: 12px !important;
+        border-radius: 14px !important;
         border: 1px solid #e2e8f0 !important;
         padding: 20px !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
     }
 
     .summary-card-header {
@@ -147,8 +135,9 @@
 
     .summary-card-header h3 {
         font-size: 1rem !important;
-        font-weight: 600 !important;
-        color: #1e293b !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
     }
 
     .summary-table {
@@ -172,119 +161,105 @@
         color: #334155 !important;
     }
 
+    /* Green-Only Status Badges */
     .status-badge {
         padding: 4px 10px !important;
-        border-radius: 6px !important;
+        border-radius: 999px !important;
         font-size: 0.75rem !important;
         font-weight: 600 !important;
-        display: inline-block !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 5px !important;
     }
-    .status-pending { background-color: #fef3c7 !important; color: #d97706 !important; }
-    .status-approved { background-color: #d1fae5 !important; color: #059669 !important; }
+    .status-pending {
+        background-color: #ecfdf5 !important;
+        color: #047857 !important;
+        border: 1px solid #a7f3d0 !important;
+    }
+    .status-approved {
+        background-color: #d1fae5 !important;
+        color: #064e3b !important;
+    }
 
-    /* Responsive adjustments for lower resolution screens */
-    @media (max-width: 1024px) {
-        .dashboard-cards-container, .quick-nav-container {
-            flex-wrap: wrap !important;
-        }
-        .dashboard-card, .quick-nav-card {
-            flex: 1 1 45% !important;
-        }
-        .bottom-summary-grid {
+    /* Responsive adjustments */
+    @media (max-width: 1100px) {
+        .analytics-grid, .bottom-summary-grid {
             grid-template-columns: 1fr !important;
         }
     }
 </style>
 
 <!-- Dashboard Welcome Header -->
-<div style="margin-bottom: 25px;">
-    <h2 style="font-size: 1.6rem; font-weight: 700; color: #0f172a; margin-bottom: 4px;">Dashboard Overview</h2>
-    <p style="color: #64748b; font-size: 0.9rem;">Welcome back, Head Administrator! Here is the latest summary of barangay operations and records.</p>
+<div class="dashboard-top-bar">
+    <div>
+        <h2 style="font-size: 1.65rem; font-weight: 700; color: #0f172a; margin-bottom: 4px;">Dashboard Overview</h2>
+        <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Welcome back, {{ auth()->user()->name ?? 'Head Administrator' }}! Here is the latest summary of barangay operations and records.</p>
+    </div>
+    <span class="green-tag"><i class="fa-solid fa-circle-check"></i> System Active &bull; 2026</span>
 </div>
 
-<!-- TOP 4 OVERVIEW CARDS -->
-<div class="dashboard-cards-container">
-    
-    <!-- Card 1: Total Residents -->
-    <div class="dashboard-card">
-        <div class="card-icon-box bg-light-green">
-            <i class="fa-solid fa-users"></i>
-        </div>
-        <div>
-            <div class="card-title-text">Total Residents</div>
-            <div class="card-value-text">{{ $totalResidents ?? '10' }}</div>
-        </div>
-    </div>
-
-    <!-- Card 2: Certificate Requests -->
-    <div class="dashboard-card">
-        <div class="card-icon-box bg-light-blue">
-            <i class="fa-solid fa-file-lines"></i>
-        </div>
-        <div>
-            <div class="card-title-text">Certificate Requests</div>
-            <div class="card-value-text">{{ $certRequests ?? '3' }}</div>
-        </div>
-    </div>
-
-    <!-- Card 3: Announcements -->
-    <div class="dashboard-card">
-        <div class="card-icon-box bg-light-yellow">
-            <i class="fa-solid fa-bullhorn"></i>
-        </div>
-        <div>
-            <div class="card-title-text">Announcements</div>
-            <div class="card-value-text">{{ $announcementsCount ?? '4' }}</div>
-        </div>
-    </div>
-
-    <!-- Card 4: Blotter Records -->
-    <div class="dashboard-card">
-        <div class="card-icon-box bg-light-red">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <div>
-            <div class="card-title-text">Blotter Records</div>
-            <div class="card-value-text">{{ $blotterCount ?? '3' }}</div>
-        </div>
-    </div>
-
-</div>
-
-<!-- QUICK NAVIGATION BUTTONS -->
-<div class="quick-nav-title">Quick Navigation</div>
-
-<div class="quick-nav-container">
+<!-- COMPACT QUICK NAVIGATION STRIP -->
+<div class="quick-nav-strip">
     <a href="{{ route('residents.page') }}" class="quick-nav-card">
-        <span>Manage Residents</span>
+        <span><i class="fa-solid fa-users" style="margin-right: 7px;"></i>Manage Residents</span>
         <i class="fa-solid fa-arrow-right"></i>
     </a>
     <a href="{{ route('certificates.page') }}" class="quick-nav-card">
-        <span>Issue Certificates</span>
+        <span><i class="fa-solid fa-file-lines" style="margin-right: 7px;"></i>Issue Certificates</span>
         <i class="fa-solid fa-arrow-right"></i>
     </a>
     <a href="{{ route('announcements.page') }}" class="quick-nav-card">
-        <span>Post Announcement</span>
+        <span><i class="fa-solid fa-bullhorn" style="margin-right: 7px;"></i>Post Announcement</span>
         <i class="fa-solid fa-arrow-right"></i>
     </a>
     <a href="{{ route('blotter.page') }}" class="quick-nav-card">
-        <span>View Blotter Complaints</span>
+        <span><i class="fa-solid fa-shield-halved" style="margin-right: 7px;"></i>Blotter Complaints</span>
         <i class="fa-solid fa-arrow-right"></i>
     </a>
     <a href="{{ route('reports.page') }}" class="quick-nav-card">
-        <span>Generate Reports</span>
+        <span><i class="fa-solid fa-chart-column" style="margin-right: 7px;"></i>Generate Reports</span>
         <i class="fa-solid fa-arrow-right"></i>
     </a>
+</div>
+
+<!-- GRAPHS & CHARTS SECTION (MONOCHROME GREEN) -->
+<div class="analytics-grid">
+    <!-- Monthly Operations Bar Chart -->
+    <div class="chart-card-box">
+        <div class="chart-header">
+            <div>
+                <h3>Monthly Barangay Operations</h3>
+                <div class="chart-subtitle">Certificates issued vs. new resident records</div>
+            </div>
+            <span class="green-tag"><i class="fa-solid fa-chart-simple"></i> 6-Month Trend</span>
+        </div>
+        <div style="height: 260px; position: relative;">
+            <canvas id="barangayActivityChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Records Distribution Doughnut Chart -->
+    <div class="chart-card-box">
+        <div class="chart-header">
+            <div>
+                <h3>Records Distribution</h3>
+                <div class="chart-subtitle">Breakdown across system modules</div>
+            </div>
+            <span class="green-tag"><i class="fa-solid fa-chart-pie"></i> Summary</span>
+        </div>
+        <div style="height: 260px; position: relative;">
+            <canvas id="recordsDistributionChart"></canvas>
+        </div>
+    </div>
 </div>
 
 <!-- LOWER SUMMARY SECTION -->
 <div class="bottom-summary-grid">
-    
     <!-- Recent Activity / Requests Table -->
     <div class="summary-card-box">
         <div class="summary-card-header">
             <h3>Recent Certificate Requests</h3>
-            <a href="{{ route('certificates.page') }}" style="color: #059669; font-size: 0.85rem; font-weight: 600; text-decoration: none;">View All</a>
+            <a href="{{ route('certificates.page') }}" style="color: #059669; font-size: 0.85rem; font-weight: 600; text-decoration: none;">View All <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i></a>
         </div>
         <table class="summary-table">
             <thead>
@@ -298,29 +273,34 @@
             <tbody>
                 @forelse($recentRequests ?? [] as $request)
                     <tr>
-                        <td>{{ $request->resident_name }}</td>
+                        <td style="font-weight: 600;">{{ $request->resident_name }}</td>
                         <td>{{ $request->certificate_type }}</td>
                         <td>{{ $request->created_at->format('M d, Y') }}</td>
-                        <td><span class="status-badge {{ $request->status == 'Approved' ? 'status-approved' : 'status-pending' }}">{{ $request->status }}</span></td>
+                        <td>
+                            <span class="status-badge {{ $request->status == 'Approved' ? 'status-approved' : 'status-pending' }}">
+                                <i class="fa-solid {{ $request->status == 'Approved' ? 'fa-circle-check' : 'fa-clock' }}"></i>
+                                {{ $request->status }}
+                            </span>
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td>Juan Dela Cruz</td>
+                        <td style="font-weight: 600;">Juan Dela Cruz</td>
                         <td>Barangay Clearance</td>
                         <td>Oct 20, 2026</td>
-                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td><span class="status-badge status-pending"><i class="fa-solid fa-clock"></i> Pending</span></td>
                     </tr>
                     <tr>
-                        <td>Maria Santos</td>
+                        <td style="font-weight: 600;">Maria Santos</td>
                         <td>Certificate of Indigency</td>
                         <td>Oct 19, 2026</td>
-                        <td><span class="status-badge status-approved">Approved</span></td>
+                        <td><span class="status-badge status-approved"><i class="fa-solid fa-circle-check"></i> Approved</span></td>
                     </tr>
                     <tr>
-                        <td>Antonio Luna</td>
+                        <td style="font-weight: 600;">Antonio Luna</td>
                         <td>Barangay Residency</td>
                         <td>Oct 18, 2026</td>
-                        <td><span class="status-badge status-approved">Approved</span></td>
+                        <td><span class="status-badge status-approved"><i class="fa-solid fa-circle-check"></i> Approved</span></td>
                     </tr>
                 @endforelse
             </tbody>
@@ -331,26 +311,119 @@
     <div class="summary-card-box">
         <div class="summary-card-header">
             <h3>Latest Announcements</h3>
-            <a href="{{ route('announcements.page') }}" style="color: #059669; font-size: 0.85rem; font-weight: 600; text-decoration: none;">View All</a>
+            <a href="{{ route('announcements.page') }}" style="color: #059669; font-size: 0.85rem; font-weight: 600; text-decoration: none;">View All <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i></a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 12px;">
             @forelse($recentAnnouncements ?? [] as $announcement)
-                <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #f1f5f9;">
+                <div style="padding: 12px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #059669;">
                     <div style="font-weight: 600; font-size: 0.875rem; color: #1e293b;">{{ $announcement->title }}</div>
-                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;">{{ $announcement->created_at->diffForHumans() }}</div>
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;">
+                        <i class="fa-regular fa-clock" style="color: #059669; margin-right: 4px;"></i>{{ $announcement->created_at->diffForHumans() }}
+                    </div>
                 </div>
             @empty
-                <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #f1f5f9;">
+                <div style="padding: 12px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #059669;">
                     <div style="font-weight: 600; font-size: 0.875rem; color: #1e293b;">Community Cleanup Drive</div>
-                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;">Posted 2 hours ago</div>
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;"><i class="fa-regular fa-clock" style="color: #059669; margin-right: 4px;"></i>Posted 2 hours ago</div>
                 </div>
-                <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #f1f5f9;">
+                <div style="padding: 12px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #10b981;">
                     <div style="font-weight: 600; font-size: 0.875rem; color: #1e293b;">Free Health Checkup Schedule</div>
-                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;">Posted Yesterday</div>
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 4px;"><i class="fa-regular fa-clock" style="color: #059669; margin-right: 4px;"></i>Posted Yesterday</div>
                 </div>
             @endforelse
         </div>
     </div>
-
 </div>
+
+<!-- Chart.js Library & Green-Only Chart Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 1. Bar Chart: Monthly Barangay Operations (Green Shades Only)
+        const activityCanvas = document.getElementById('barangayActivityChart');
+        if (activityCanvas) {
+            new Chart(activityCanvas.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [
+                        {
+                            label: 'Certificates Issued',
+                            data: [8, 12, 10, 15, 11, {{ (int)($certRequests ?? 3) }}],
+                            backgroundColor: '#059669',
+                            borderRadius: 6,
+                            barPercentage: 0.55
+                        },
+                        {
+                            label: 'Residents Registered',
+                            data: [4, 6, 5, 9, 7, {{ (int)($totalResidents ?? 10) }}],
+                            backgroundColor: '#6ee7b7',
+                            borderRadius: 6,
+                            barPercentage: 0.55
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { usePointStyle: true, boxWidth: 8, color: '#334155' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            ticks: { color: '#64748b' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#64748b' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Doughnut Chart: Records Distribution (Green Shades Only)
+        const distCanvas = document.getElementById('recordsDistributionChart');
+        if (distCanvas) {
+            new Chart(distCanvas.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Residents', 'Certificates', 'Announcements', 'Blotter Records'],
+                    datasets: [{
+                        data: [
+                            {{ (int)($totalResidents ?? 10) }},
+                            {{ (int)($certRequests ?? 3) }},
+                            {{ (int)($announcementsCount ?? 4) }},
+                            {{ (int)($blotterCount ?? 2) }}
+                        ],
+                        backgroundColor: [
+                            '#064e3b', // Deep Forest Green
+                            '#059669', // Emerald Green
+                            '#34d399', // Mint Green
+                            '#a7f3d0'  // Soft Light Green
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '66%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { usePointStyle: true, padding: 14, boxWidth: 8, color: '#334155' }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
 @endsection
